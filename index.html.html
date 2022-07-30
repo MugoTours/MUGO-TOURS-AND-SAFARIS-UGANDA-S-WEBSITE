@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="floating-wpp.min.js"></script>
+<link rel="stylesheet" href="floating-wpp.min.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>WELCOME TO MUGO TOURS AND SAFARIS UGANDA</title>
+	<style type="text/css">
+	
+.logo{
+	color: darkgreen;
+	font-size: 48px;
+	font-weight: 700;
+	letter-spacing: 2px;
+}  
+span{
+	color: green;
+}
+
+
+span{
+color: #000;
+}
+
+
+span{
+color: red;
+}
+.slider-frame{
+	overflow: hidden;
+	height: 400px;
+	width: 1000px;
+	margin-left: 60px;
+	margin-top: 10px;
+
+}
+
+@-webkit-keyframes slide_animation{
+ 	0% {left: 0px;}
+ 	10% {left:0px;}
+ 	20% {left:1200px;}
+ 	30% {left: 1200px;}
+ 	40% {left:2400px;}
+ 	50% {left:2400px;}
+ 	60% {left:1200px;}
+ 	70% {left: 1200px;}
+ 	80% {left:0px;}
+ 	90% {left:0px;}
+ 	100% {left:0px;}
+ 	
+ }
+ .slider-images{
+ 	width: 3600px;
+ 	height: 800px;
+ 	margin: 0 0 0 -2400px;
+ 	position: relative;
+ 	-webkit-animation-name: slide_animation;
+ 	-webkit-animation-duration: 33s;
+ 	-webkit-animation-iteration-count: infinite;
+ 	-webkit-animation-direction: alternate;
+ 	-webkit-animation-play-state: running;
+ }
+ .img-container{
+ 	height: 800px;
+ 	width: 1200px;
+ 	position: relative;
+ 	float: right;
+ }
+ .text h2{
+	color: #000;
+	font-weight: 400;
+	font-size: 30px;
+	letter-spacing: 2px;
+}
+.text p{
+	color: darkgreen;
+	text-transform: capitalize;
+	font-size: 20px;
+	margin-bottom: 30px;
+	word-spacing: 3px;
+	letter-spacing: 1px;
+	position: centre;
+}
+.footer{
+	width: 100%;
+	height: 50px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.footer a{
+	text-decoration: none;
+	color: darkblue;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: bottom;
+}
+.footer a:hover{
+	border-bottom: 4px solid orange;
+	transition: 0.4s;
+}
+.social-icon{
+	color: #000;
+	transition: color 0.3s;
+	align-items: center;
+	margin-left: 750px;
+	margin-bottom: 230px;
+	size: 25%;
+	text-decoration: none;
+	margin: 750 8px;
+}
+.social-icon: hover{
+	color: red;
+}
+
+		</style>
+	<nav>
+		<div class="nav">
+			<h2 class="logo"><span>MUGO TOURS AND </span>SAFARIS UGANDA</h2>
+			
+		</div>
+	</nav>
+</head>
+<body>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyARZ0dREU9KwMtGnyEsBlv7isAQh4osMHY",
+    authDomain: "mugo-tours-and-safaris-u-9dd40.firebaseapp.com",
+    projectId: "mugo-tours-and-safaris-u-9dd40",
+    storageBucket: "mugo-tours-and-safaris-u-9dd40.appspot.com",
+    messagingSenderId: "100578876765",
+    appId: "1:100578876765:web:db954032fe9c669a1b5cb4",
+    measurementId: "G-6BHS0QE5R6"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  function writeData() {
+  	firebase.database().ref("Client").set({
+  		FirstName:document.getElementById("namefield").value,
+  		MiddleName:document.getElementById("namefield").value,
+  		LastName:document.getElementById("namefield").value,
+  		Email:document.getElementById("emailfield").value,
+  		Country:document.getElementById("countryfield").value,
+  		Mobile_Number:document.getElementById("phonefield").value
+  	});
+
+  	getData();
+  }
+  function getData(){
+  	firebase.database.ref('/').once('value', function(tourism){
+  		tourism.forEach(function(childtourism)){
+  			var childkey = childtourism.key;
+  			var childData = childtourism.val();
+  			document.getElementById("data").innerHTML = childData['FirstName'] + ","+childData['MiddleName'] + ", "+childData['LastName'] + ","+childData['Email'] + ","+childData['Country'] + ","+childData['Mobile_Number'];
+  		}
+  	})
+  }
+
+  getData();
+</script>
+
+ <h3>Client Login</h3>
+ <input type="text" placeholder="FirstName" id="namefield">
+ <input type="text" placeholder="MiddleName" id="namefield">
+ <input type="text" placeholder="LastName" id="namefield">
+ <input type="email" placeholder="Email" id="emailfield">
+ <input type="text" placeholder="Country of Origin" id="countryfield">
+ <input type="phone" placeholder="Mobile_Number" id="phonefield">
+ <button onclick="writeData()">Submit</button>
+ <p id="data"></p>
+
+<br><br><br><br>
+
+
+	<a class="social-icon" href="https://twitter.com/MugoTours" target="_blank">
+		<ion-icon name="logo-twitter"></ion-icon>
+	</a>
+	<a href="https://facebook.com/mugo_tours_and_safaris_uganda" target="_blank">
+	<ion-icon name="logo-facebook"></ion-icon></a>
+	<a href="">
+	<ion-icon name="call-outline"></ion-icon></a>
+	<a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">
+	<ion-icon name="mail-open-outline"></ion-icon></a>
+	<a href="https://studio.youtube.com/channel/UC2PYnW9dlSpH8LaL5n9pGWg/videos/upload?filter=%5B%5D&sort=%7B%22columnType%22%3A%22date%22%2C%22sortOrder%22%3A%22DESCENDING%22%7D">
+	<ion-icon name="logo-youtube"></ion-icon></a>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+	<table border="0" width="100%" bgcolor="#fabd02">
+		<tr>
+			<th width="12.5%" ><font color="white"><a href="welcome.html">HOME</a></font></th>
+			<th width="12.5%" ><font color="white"><a href="about us.html"><font color="green">ABOUT US</font></a></font></th>
+			<th width="12.5%" ><font color="white"><a href="gallery"><font color="green">GALLERY</font></a></font></th>
+			<th width="12.5%" ><font color="white"><a href="Contact page.html"><font color="green">CONTACT US</font></a></font></th></th>
+			<th width="12.5%" ><font color="white"><a href="book.html"><font color="green">BOOK NOW</font></a></font></th>
+			<th width="12.5%" ><font color="white"><a href="donate.html"><font color="green">DONATE</font></a></font></th>
+			<th width="12.5%" ><font color="white"><a href="accommodation.html"><font color="green">ACCOMMODATION</font></a></font></th>
+			<th width="12.5%" ><font color="white"><a href="faq.html"><font color="green">TRIP</font></a></font></th>
+		</tr>
+		
+	</table>
+	<div class="text">
+				<marquee><h2><span>WELCOME TO MUGO TOURS AND SAFARIS UGANDA </span>THE BEST IN TOURISM IN EAST AFRICA. For more information book or contact us via the floating whatsapp icon below and on the above media platforms:- twitter, facebook, instogram, youtube, direct call or messenger mail or email us: mugosafaris@gmail.com or mugotoursandsafarisuganda@gmail.com
+		        </h2></marquee>
+		        <p>Explore the World with good sceneries, nature, beautiful animals, snows, rivers and many more with only <span>MUGO TOURS AND </span> SAFARIS UGANDA</p>
+		        
+			</div>
+	<div class="slider-frame">
+		<div class="slider-images">
+			<div class="img-container">
+				<img src="view4.png">
+				
+			</div>
+			<div class="img-container">
+				<img src="camp2.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="chamileon.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="chamileon.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="flower.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="guide.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="ice.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="local3.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="newway.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="peak.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="view4.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="smw2.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="through.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="tools2.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="director.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="visitors.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="seee.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="ice1.jpg">
+				
+			</div>
+			<div class="img-container">
+				<img src="nyabitaba.jpg">
+				
+			</div>
+			
+		</div>
+		
+	</div>
+<div id="myDiv"></div>
+</body>
+  
+<script type="text/javascript">
+  $(function () {
+    $('#myDiv').floatingWhatsApp({
+      phone: '+256751504693',
+      showpopup: 'true',
+      popupMessage: "Welcome to Mugo Tours and Safaris Uganda. How should we help you!",
+      headerTitle: "Whatsapp Chat",
+      message: "Welcome to Mugo Tours and Safaris Uganda. How should we help you! We are ready to save you our esteemed customer",
+      position: 'right'
+    });
+  });
+</script>
+<table border="0" width="100%" bgcolor="#fabd02">
+		<tr>
+			<th width="12.5%" ><font color="white"><a href="welcome.html">HOME</a></font></th>
+			<th width="12.5%" ><font color="white"><a href="about us.html"><font color="green">ABOUT US</font></a></font></th>
+			<th width="12.5%" ><font color="white"><a href="gallery"><font color="green">GALLERY</font></a></font></th>
+			<th width="12.5%" ><font color="white"><a href="Contact page.html"><font color="green">CONTACT US</font></a></font></th></th>
+			<th width="12.5%" ><font color="white"><a href="book.html"><font color="green">BOOK NOW</font></a></font></th>
+			<th width="12.5%" ><font color="white"><a href="donate.html"><font color="green">DONATE</font></a></font></th>
+			<th width="12.5%" ><font color="white"><a href="accommodation.html"><font color="green">ACCOMMODATION</font></a></font></th>
+			<th width="12.5%" ><font color="white"><a href="faq.html"><font color="green">TRIP</font></a></font></th>
+		</tr>
+		
+	</table>
+
+<div class="footer">
+	<!-- GetButton.io widget -->
+<script type="text/javascript">
+    (function () {
+        var options = {
+            whatsapp: "+256 751 504 693", // WhatsApp number
+            call_to_action: "Whatsapp us", // Call to action
+            button_color: "#FF6550", // Color of button
+            position: "right", // Position may be 'right' or 'left'
+        };
+        var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    })();
+</script>
+<!-- /GetButton.io widget -->
+	
+</div>
+</html>
